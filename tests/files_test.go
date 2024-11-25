@@ -80,3 +80,28 @@ func TestReadFile_MultiDigitIntegers(t *testing.T) {
 		}
 	}
 }
+
+func TestReadFile_PositiveNegativeIntegers(t *testing.T) {
+	// Create a temporary file with positive and negative integers
+	tempFile, err := os.CreateTemp("", "integers.txt")
+	if err != nil {
+		t.Fatalf("Failed to create temporary file: %v", err)
+	}
+	defer os.Remove(tempFile.Name())
+
+	// Write positive and negative integers to the file
+	content := []byte("10\n-5\n3\n-8\n0\n")
+	if _, err := tempFile.Write(content); err != nil {
+		t.Fatalf("Failed to write to temporary file: %v", err)
+	}
+	tempFile.Close()
+
+	// Call ReadFile with the temporary file
+	result := files.ReadFile(tempFile.Name())
+
+	// Check if the result matches the expected values
+	expected := []int{10, -5, 3, -8, 0}
+	if !reflect.DeepEqual(result, expected) {
+		t.Errorf("Expected %v, but got %v", expected, result)
+	}
+}
