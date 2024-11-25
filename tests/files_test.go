@@ -50,3 +50,33 @@ func TestReadFile_SingleDigitIntegers(t *testing.T) {
 		t.Errorf("Expected %v, but got %v", expected, result)
 	}
 }
+
+func TestReadFile_MultiDigitIntegers(t *testing.T) {
+	// Create a temporary file with multi-digit integers
+	tempFile, err := os.CreateTemp("", "multi-digit.txt")
+	if err != nil {
+		t.Fatalf("Failed to create temporary file: %v", err)
+	}
+	defer os.Remove(tempFile.Name())
+
+	// Write multi-digit integers to the file
+	content := []byte("123\n4567\n89012\n345678\n")
+	if _, err := tempFile.Write(content); err != nil {
+		t.Fatalf("Failed to write to temporary file: %v", err)
+	}
+	tempFile.Close()
+
+	// Call ReadFile with the multi-digit integer file
+	result := files.ReadFile(tempFile.Name())
+
+	// Check if the result matches the expected values
+	expected := []int{123, 4567, 89012, 345678}
+	if len(result) != len(expected) {
+		t.Errorf("Expected %d integers, but got %d", len(expected), len(result))
+	}
+	for i, v := range expected {
+		if result[i] != v {
+			t.Errorf("Expected %d at index %d, but got %d", v, i, result[i])
+		}
+	}
+}
