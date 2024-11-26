@@ -27,3 +27,14 @@ func TestVariance(t *testing.T) {
 		t.Error("TestVariance Failed")
 	}
 }
+
+func TestStandardDeviation(t *testing.T) {
+	intSlc := []int{1, 2, 3, 4, 5, 6, 7}
+	got := maths.StandardDeviation(intSlc)
+	expected := float64(2)
+	// Compare 'got' and 'expected'
+	if got != expected {
+		t.Errorf("Expected: %f, Got: %f", expected, got)
+		t.Error("TestVariance Failed")
+	}
+}
