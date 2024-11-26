@@ -10,3 +10,16 @@ func Mean(nums []int) float64 {
 
 	return result / float64(len(nums))
 }
+
+func Variance(nums []int) float64 {
+	var result float64
+	mean := Mean(nums)
+
+	// Calculate cumulative sum of squared deviations
+	for _, num := range nums {
+		deviation := (float64(num) - mean) * (float64(num) - mean)
+		result += deviation
+	}
+
+	return result / float64(len(nums))
+}
