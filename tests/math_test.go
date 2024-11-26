@@ -6,13 +6,13 @@ import (
 	"linear-stats/maths"
 )
 
-func TestMean_EmptyDataSet(t *testing.T) {
-	subject := []int{}
-	expected := 0.0
+func TestMean(t *testing.T) {
+	subject := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	expected := 5.5
 	got := maths.Mean(subject)
 
 	if got != expected {
-		t.Errorf("Expected: %f\nGot: %f", expected, got)
+		t.Errorf("Expected: %f, Got: %f", expected, got)
 		t.Errorf("TestMean_EmptyDataSet failed!")
 	}
 }
