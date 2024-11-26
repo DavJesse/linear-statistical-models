@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"math"
 	"testing"
 
 	"linear-stats/maths"
@@ -18,22 +19,15 @@ func TestMean(t *testing.T) {
 }
 
 func TestVariance(t *testing.T) {
-	intSlc := []int{1, 2, 3, 4, 5, 6, 7}
-	got := maths.Variance(intSlc)
-	expected := float64(4)
-	// Compare 'got' and 'expected'
-	if got != expected {
-		t.Errorf("Expected: %f, Got: %f", expected, got)
-		t.Error("TestVariance Failed")
-	}
-}
+	input := []int{2, 4, 6, 8}
+	output := []int{3, 5, 7, 9}
+	got := maths.PearsonCoefficient(input, output)
+	expected := float64(1)
 
-func TestStandardDeviation(t *testing.T) {
-	intSlc := []int{1, 2, 3, 4, 5, 6, 7}
-	got := maths.StandardDeviation(intSlc)
-	expected := float64(2)
-	// Compare 'got' and 'expected'
-	if got != expected {
+	tolerance := 1e-9
+	difference := math.Abs(got - expected)
+
+	if difference > tolerance {
 		t.Errorf("Expected: %f, Got: %f", expected, got)
 		t.Error("TestVariance Failed")
 	}

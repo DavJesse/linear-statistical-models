@@ -13,20 +13,21 @@ func Mean(nums []int) float64 {
 	return result / float64(len(nums))
 }
 
-func Variance(nums []int) float64 {
+func PearsonCoefficient(input, output []int) float64 {
 	var result float64
-	mean := Mean(nums)
+	var in, out int
+	meanInput := Mean(input)
+	meanOutput := Mean(output)
 
 	// Calculate cumulative sum of squared deviations
-	for _, num := range nums {
-		deviation := (float64(num) - mean) * (float64(num) - mean)
+	for in < len(input) && out < len(output) {
+		deviation := (float64(input[in]) - meanInput) * (float64(output[out]) - meanOutput)
 		result += deviation
+		in++
+		out++
 	}
 
-	return result / float64(len(nums))
-}
+	result = result / (float64(len(input)) * (math.Sqrt(result / float64(len(input)))) * (math.Sqrt(result / float64(len(output)))))
 
-func StandardDeviation(nums []int) float64 {
-	variance := Variance(nums) // Calculate variance
-	return math.Sqrt(variance)
+	return result
 }
