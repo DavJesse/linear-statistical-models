@@ -24,4 +24,9 @@ func main() {
 	}
 
 	data := files.ReadFile(filePath)
+
+	// Filter out empty files parsed as data
+	if len(data) == 0 {
+		log.Fatal("File parsed as data is empty.")
+	}
 }
