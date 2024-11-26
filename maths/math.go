@@ -19,7 +19,7 @@ func PearsonCoefficient(input, output []int) float64 {
 	meanInput := Mean(input)
 	meanOutput := Mean(output)
 
-	// Calculate cumulative sum of squared deviations
+	// Calculate cumulative sum of multiple deviations
 	for in < len(input) && out < len(output) {
 		deviation := (float64(input[in]) - meanInput) * (float64(output[out]) - meanOutput)
 		result += deviation
