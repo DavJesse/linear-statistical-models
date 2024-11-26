@@ -1,5 +1,7 @@
 package maths
 
+import "math"
+
 func Mean(nums []int) float64 {
 	var result float64
 
@@ -22,4 +24,9 @@ func Variance(nums []int) float64 {
 	}
 
 	return result / float64(len(nums))
+}
+
+func StandardDeviation(nums []int) float64 {
+	variance := Variance(nums) // Calculate variance
+	return math.Sqrt(variance)
 }
