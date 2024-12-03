@@ -70,3 +70,16 @@ func CalculateSlope(input, output []int) float64 {
 
 	return numerator / denominator
 }
+
+func CalculateYIntercept(input, output []int) float64 {
+	// c = yˉ ​− m⋅xˉ
+	// Where:
+	// 'yˉ' is mean of the output
+	// 'm' is slope
+	// 'xˉ' is mean of the input
+	slope := CalculateSlope(input, output)
+	meanInput := Mean(input)
+	meanOutput := Mean(output)
+
+	return meanOutput - (slope * meanInput)
+}
