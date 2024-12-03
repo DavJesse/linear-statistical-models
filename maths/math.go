@@ -1,6 +1,9 @@
 package maths
 
-import "math"
+import (
+	"log"
+	"math"
+)
 
 func Mean(nums []int) float64 {
 	var result float64
@@ -14,20 +17,35 @@ func Mean(nums []int) float64 {
 }
 
 func PearsonCoefficient(input, output []int) float64 {
-	var result float64
-	var in, out int
+	var numerator, totalSquaredInputDeviation, totalSquaredOutputDeviation float64
+	var i int
+
+	// input and output arrays must have the same size
+	if len(input) != len(output) {
+		log.Fatal("Input and output arrays must have the same length.")
+	}
+
 	meanInput := Mean(input)
 	meanOutput := Mean(output)
 
 	// Calculate cumulative sum of multiple deviations
-	for in < len(input) && out < len(output) {
-		deviation := (float64(input[in]) - meanInput) * (float64(output[out]) - meanOutput)
-		result += deviation
-		in++
-		out++
+	for i < len(input) {
+		inputDeviation := float64(input[i]) - meanInput
+		outputDeviation := float64(output[i]) - meanOutput
+
+		// accumulate sums of covariance component(numerator), squared deviations
+		numerator += inputDeviation * outputDeviation
+		totalSquaredInputDeviation += inputDeviation * inputDeviation
+		totalSquaredOutputDeviation += outputDeviation * outputDeviation
+
+		i++
 	}
 
-	result = result / (float64(len(input)) * (math.Sqrt(result / float64(len(input)))) * (math.Sqrt(result / float64(len(output)))))
+	// Establish denominator of equation
+	denominator := math.Sqrt(totalSquaredInputDeviation * totalSquaredOutputDeviation)
+	if denominator == 0 {
+		log.Fatal("Cannot calculate Pearson correlation coefficient, the standard deviations are zero.")
+	}
 
-	return result
+	return numerator / denominator
 }
