@@ -45,3 +45,18 @@ func TestExtractParams(t *testing.T) {
 		t.Error("TestExtractParams Failed")
 	}
 }
+
+func TestCalculateSlope(t *testing.T) {
+	input := []int{1, 2, 3, 4}
+	output := []int{2, 3, 5, 7}
+	got := maths.CalculateSlope(input, output)
+	expected := 1.7
+
+	tolerance := 1e-9
+	difference := math.Abs(got - expected)
+
+	if difference > tolerance {
+		t.Errorf("Expected: %f, Got: %f", expected, got)
+		t.Error("TestVariance Failed")
+	}
+}
