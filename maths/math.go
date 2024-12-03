@@ -49,3 +49,24 @@ func PearsonCoefficient(input, output []int) float64 {
 
 	return numerator / denominator
 }
+
+func CalculateSlope(input, output []int) float64 {
+	var numerator, denominator, totalInput, totalOutput, totalInputOutput, totalSquareInput float64
+	var i int
+
+	for i < len(input) {
+		// Establish parameters
+		totalInputOutput += float64(input[i]) * float64(output[i])
+		totalInput += float64(input[i])
+		totalOutput += float64(output[i])
+		totalSquareInput += float64(input[i]) * float64(input[i])
+
+		i++
+	}
+
+	// Establish denominator of equation
+	numerator = (float64(len(input)) * totalInputOutput) - (totalInput * totalOutput)
+	denominator = (float64(len(input)) * totalSquareInput) - (totalInput * totalInput)
+
+	return numerator / denominator
+}
