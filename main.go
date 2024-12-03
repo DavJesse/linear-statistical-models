@@ -1,11 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"strings"
 
 	"linear-stats/files"
+	"linear-stats/maths"
 )
 
 func main() {
@@ -19,7 +21,8 @@ func main() {
 	// Define file path from arguments
 	// Check file validity from its extenstion
 	filePath := args[0]
-	if !strings.HasPrefix(filePath, ".txt") {
+
+	if !(strings.HasSuffix(filePath, ".txt")) {
 		log.Fatalf("Invalid file format: %v is not a text file", filePath)
 	}
 
@@ -29,4 +32,9 @@ func main() {
 	if len(data) == 0 {
 		log.Fatal("File parsed as data is empty.")
 	}
+
+	input, output := files.ExtractParams(data)
+	PearsonCoefficient := maths.PearsonCoefficient(input, output)
+
+	fmt.Printf("Pearson Correlation Coefficient: %.10f\n", PearsonCoefficient)
 }
