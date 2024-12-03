@@ -33,8 +33,14 @@ func main() {
 		log.Fatal("File parsed as data is empty.")
 	}
 
+	// Establish input and output arrays as parameters
 	input, output := files.ExtractParams(data)
+
+	// Calculate slope, y-intercept, and Pearson correlation coefficient to express linear regression and Pearson correlation coefficient
+	slope := maths.CalculateSlope(input, output)
+	yIntercept := maths.CalculateYIntercept(input, output)
 	PearsonCoefficient := maths.PearsonCoefficient(input, output)
 
+	fmt.Printf("Linear Regression Line: y = %.6fx + %.6f\n", slope, yIntercept)
 	fmt.Printf("Pearson Correlation Coefficient: %.10f\n", PearsonCoefficient)
 }
