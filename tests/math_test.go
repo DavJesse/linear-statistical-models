@@ -60,3 +60,18 @@ func TestCalculateSlope(t *testing.T) {
 		t.Error("TestVariance Failed")
 	}
 }
+
+func TestCalculateYIntercept(t *testing.T) {
+	input := []int{1, 2, 3, 4}
+	output := []int{2, 3, 5, 7}
+	got := maths.CalculateYIntercept(input, output)
+	expected := float64(0)
+
+	tolerance := 1e-9
+	difference := math.Abs(got - expected)
+
+	if difference > tolerance {
+		t.Errorf("Expected: %f, Got: %f", expected, got)
+		t.Error("TestVariance Failed")
+	}
+}
