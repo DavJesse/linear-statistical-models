@@ -18,7 +18,7 @@ func TestMean(t *testing.T) {
 	}
 }
 
-func TestVariance(t *testing.T) {
+func TestPearsonCoefficient(t *testing.T) {
 	input := []int{2, 4, 6, 8}
 	output := []int{3, 5, 7, 9}
 	got := maths.PearsonCoefficient(input, output)
